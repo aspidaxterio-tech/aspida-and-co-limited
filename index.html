@@ -1,34 +1,95 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Aspida & Co Limited</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: linear-gradient(to right, #1e90ff, #00c853);
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
-        .box {
-            background: rgba(0,0,0,0.4);
-            padding: 30px;
-            border-radius: 15px;
-            display: inline-block;
-        }
-    </style>
-</head>
-<body>
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Mail, Phone, MessageCircle, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
-<div class="box">
-    <h1>Aspida & Co Limited</h1>
-    <p>ICT / TECH BUSINESS</p>
+export default function AspidaWebsite() {
+  const [open, setOpen] = useState(false);
 
-    <h3>Contact</h3>
-    <p>📞 09031429578</p>
-    <p>📱 WhatsApp: 09031429578</p>
-    <p>📧 aspidaxterio@gmail.com</p>
-</div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-green-800 to-black text-white">
+      {/* Navbar */}
+      <div className="flex justify-between items-center px-6 py-4 border-b border-white/20">
+        <h1 className="text-xl font-bold">Aspida & Co Limited</h1>
+        <Button onClick={() => setOpen(!open)}>Contact</Button>
+      </div>
 
-</body>
-</html>
+      {/* Hero Section */}
+      <div className="text-center py-20 px-4">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-4xl md:text-6xl font-bold"
+        >
+          ICT & Digital Business Solutions
+        </motion.h1>
+        <p className="mt-4 text-lg text-white/80">
+          We build smart, reliable and modern tech solutions for businesses.
+        </p>
+        <Button className="mt-6">Get Started</Button>
+      </div>
+
+      {/* Services */}
+      <div className="grid md:grid-cols-3 gap-6 px-6 py-10">
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="font-bold text-xl">Web Development</h2>
+            <p className="text-white/70 mt-2">
+              Professional business websites and web apps.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="font-bold text-xl">ICT Consulting</h2>
+            <p className="text-white/70 mt-2">
+              Helping businesses grow with technology.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <h2 className="font-bold text-xl">Branding</h2>
+            <p className="text-white/70 mt-2">
+              Logos, identity design, and digital presence.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Contact Section */}
+      {open && (
+        <div className="fixed bottom-0 left-0 right-0 bg-black/95 p-6 border-t border-white/20">
+          <h2 className="text-xl font-bold mb-4">Contact Us</h2>
+
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <Phone /> 09031429578
+            </div>
+            <div className="flex items-center gap-3">
+              <MessageCircle /> WhatsApp: 09031429578
+            </div>
+            <div className="flex items-center gap-3">
+              <Mail /> aspidaxterio@gmail.com
+            </div>
+            <div className="flex items-center gap-3">
+              <Globe /> www.aspida.com
+            </div>
+          </div>
+
+          <Button className="mt-4" onClick={() => setOpen(false)}>
+            Close
+          </Button>
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="text-center py-6 text-white/60 border-t border-white/20 mt-10">
+        © {new Date().getFullYear()} Aspida & Co Limited. All rights reserved.
+      </div>
+    </div>
+  );
+}
